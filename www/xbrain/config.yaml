@@ -1,7 +1,8 @@
 name: xbrain
-version: 2
+version: 3
 libraries:
 - name: "django"
-  version: "1.4"
-handle:
-- expire:  if( path ~ "*" ) time 1
+  version: "1.5"
+handlers:
+- url: /static/
+  static_path: ./

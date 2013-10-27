@@ -1,4 +1,24 @@
 # Django settings for mysite project.
+import os.path
+from os import environ
+import os
+
+dev=not environ.get("APP_NAME", "")
+if dev:
+    MYSQL_DB="xbrain"
+    MYSQL_USER="xbrainu"
+    MYSQL_PASS="xbrainp"
+    MYSQL_HOST_M="127.0.0.1"
+    MYSQL_HOST_S="127.0.0.1"
+    MYSQL_PORT='3306'
+else:
+    import sae.const
+    MYSQL_DB=sae.const.MYSQL_DB
+    MYSQL_USER=sae.const.MYSQL_USER
+    MYSQL_PASS=sae.const.MYSQL_PASS
+    MYSQL_HOST_M=sae.const.MYSQL_HOST
+    MYSQL_HOST_S=sae.const.MYSQL_HOST_S
+    MYSQL_PORT=sae.const.MYSQL_PORT
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -11,12 +31,12 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '',                      # Or path to database file if using sqlite3.
-        'USER': '',                      # Not used with sqlite3.
-        'PASSWORD': '',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': MYSQL_DB,                      # Or path to database file if using sqlite3.
+        'USER': MYSQL_USER,                      # Not used with sqlite3.
+        'PASSWORD': MYSQL_PASS,                  # Not used with sqlite3.
+        'HOST': MYSQL_HOST_M,                      # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': MYSQL_PORT,                      # Set to empty string for default. Not used with sqlite3.
     }
 }
 
@@ -94,7 +114,7 @@ TEMPLATE_LOADERS = (
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    #'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     # Uncomment the next line for simple clickjacking protection:
@@ -110,10 +130,12 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    os.path.join(os.path.dirname(__file__), '../templates').replace('\\','/'),
 )
 
 INSTALLED_APPS = (
     'django.contrib.auth',
+    'django.contrib.admin',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
@@ -123,6 +145,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
+    'birthday',
 )
 
 # A sample logging configuration. The only tangible logging

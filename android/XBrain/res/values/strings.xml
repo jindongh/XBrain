@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">XBrain</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="tab_birthday">Birth</string>
+    <string name="tab_book">Book</string>
+    <string name="tab_todo">Todo</string>
+    <string name="tab_idea">Idea</string>
+    <string name="tab_setting">Setting</string>
+    
+    <string name="add_book">Add Book</string>
+</resources>
